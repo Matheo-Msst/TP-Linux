@@ -120,9 +120,42 @@ Old style watch rules are slower
 ```
 
 ## Étape 5 : Sécurisation avec Firewalld
-### Configurer un pare-feu pour SSH et HTTP/HTTPS uniquement :
+### 1.Configurer un pare-feu pour SSH et HTTP/HTTPS uniquement :
 >#### Autorisez uniquement les ports nécessaires pour SSH et HTTP/HTTPS :
+```powershell
+[root@localhost matheo]# sudo firewall-cmd --permanent --remove-service dhcpv6-client
+success
 
+[root@localhost matheo]# sudo firewall-cmd --permanent --remove-service cockpit
+success
+
+[root@localhost matheo]# sudo firewall-cmd --reload
+success
+
+[root@localhost matheo]# sudo firewall-cmd --permanent --add-port=22/tcp
+success
+
+[root@localhost matheo]# sudo firewall-cmd --permanent --add-port=443/tcp
+success
+
+[root@localhost matheo]# sudo firewall-cmd --permanent --add-port=80/tcp
+success
+
+[root@localhost matheo]# sudo firewall-cmd --reload
+success
+
+```
 >#### Bloquez toutes les autres connexions :
+```powershell
+[root@localhost matheo]# sudo firewall-cmd --set-default-zone=drop
+```
+### 2.Bloquer des IP suspectes :
+>#### À l’aide des logs d’audit et des connexions réseau, bloquez les adresses IP malveillantes identifiée :
+```powershell
 
+```
+### 3.Restreindre SSH à un sous-réseau spécifique :
+>#### Limitez l’accès SSH à votre réseau local uniquement (par exemple, 192.168.x.x) :
+```powershell
 
+```
